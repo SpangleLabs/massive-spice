@@ -12,7 +12,7 @@ public class Core {
 		login_data.put("passwd",password);
 		login_data.put("api_type","json");
 		String login_string = Web.build_query_string(login_data,"POST");
-		String login_response = Web.post_page("http://reddit.com/api/login",login_string);
+		String login_response = Web.post_page("http://www.reddit.com/api/login",login_string);
 		System.out.println(login_response);
 		//fire login command, get ['json']['data']['modhash']
 		
