@@ -28,5 +28,16 @@ public class Web_int {
 		this.modhash = (String) login_reply_data.get("modhash");
 		return true;
 	}
+	
+	public JSONArray list_subreddit(String subreddit) {
+		/* *
+		 * Gets the new post list from a specified subreddit.
+		 */
+		String list_response = Web.get_page("http://www.reddit.com/r/"+subreddit+"/new.json");
+		JSONObject list_obj = (JSONObject) JSONValue.parse(list_response);
+		JSONObject list_data = (JSONObject) list_obj.get("data");
+		this.modhash = (String) list_data.get("modhash");
+		return (JSONArray) list_data.get("children");
+	}
 
 }
