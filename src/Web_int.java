@@ -44,7 +44,7 @@ public class Web_int {
 		HashMap<String,String> data_send = new HashMap<String,String>();
 		data_send.put("mark","false");
 		String data_string = Web.build_query_string(data_send, "GET");
-		String inbox_response = Web.get_page("http://www.reddit.com/message/inbox.json"+data_string);
+		String inbox_response = Web.get_page("http://www.reddit.com/message/inbox.json"+data_string,this.modhash);
 		JSONObject inbox_obj = (JSONObject) JSONValue.parse(inbox_response);
 		JSONObject inbox_data = (JSONObject) inbox_obj.get("data");
 		this.modhash = (String) inbox_data.get("modhash");
