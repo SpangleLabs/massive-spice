@@ -8,6 +8,6 @@ public class Core {
 		String password = "b;ladf";
 		web_int.login(username, password);
 		//fire login command, get ['json']['data']['modhash']
-		
+		//wants to check inbox, check submissions, load data, etc
 	}
 }
