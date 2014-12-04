@@ -66,7 +66,7 @@ public class HelloGoodbye extends JFrame {
 		OuterPanel.add(ConfigPanel, OuterConstraints);
 		add(OuterPanel);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setMinimumSize(new Dimension(600, 400));
+		setMinimumSize(new Dimension(700, 500));
 		pack();
 		setVisible(true);
 	}
