@@ -66,8 +66,8 @@ public class CoreGUI extends JFrame {
 		TodoPanel = new JPanel();
 		TodoPanel.setOpaque(true);
 		TodoPanel.setBackground(Color.GRAY);
-		TodoPanel.setPreferredSize(new Dimension(200,100));
 		OuterConstraints.gridy = 2;
+		OuterConstraints.fill = GridBagConstraints.BOTH;
 		OuterConstraints.weighty = 1.0;
 		OuterPanel.add(TodoPanel, OuterConstraints);
 		ConfigPanel = new JPanel();
@@ -75,6 +75,7 @@ public class CoreGUI extends JFrame {
 		ConfigPanel.setBackground(Color.CYAN);
 		ConfigPanel.setPreferredSize(new Dimension(200,50));
 		OuterConstraints.gridy = 3;
+		OuterConstraints.fill = GridBagConstraints.NONE;
 		OuterConstraints.weighty = 0;
 		OuterPanel.add(ConfigPanel, OuterConstraints);
 		add(OuterPanel);
