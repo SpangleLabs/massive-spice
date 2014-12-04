@@ -1,20 +1,17 @@
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-
 import java.awt.GridLayout;
 
-
 import javax.swing.JButton;
-//import javax.swing.JButton;
 import javax.swing.JFrame;
-//import javax.swing.JLabel;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
-
 
 /**
  * Core GUI, gently building a swing GUI for the massive spice project.
@@ -33,7 +30,14 @@ public class CoreGUI extends JFrame {
 		 */
 		super("Massive spice, SVExchange giveaway helper");
 		this.BuildCoreGUI();
+		this.BuildTodoPanel();
 		this.BuildConfigPanel();
+	}
+	
+	private void BuildTodoPanel() {
+		TodoPanel.setLayout(new FlowLayout());
+		JLabel TodoTitle = new JLabel("Todo list:",SwingConstants.CENTER);
+		TodoPanel.add(TodoTitle,BorderLayout.NORTH);
 	}
 	
 	private void BuildConfigPanel() {
