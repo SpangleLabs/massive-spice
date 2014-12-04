@@ -12,16 +12,24 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 
-public class HelloGoodbye extends JFrame {
-	/**
-	 * This is a testing GUI, to teach me how to GUI.
-	 */
+/**
+ * Core GUI, gently building a swing GUI for the massive spice project.
+ */
+public class CoreGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
-//	private static final String HELLO = "Hello!";
-//	private static final String GOODBYE = "Goodbye!";
-//	private String message = HELLO;
-	public HelloGoodbye() {
+
+	public CoreGUI() {
+		/* *
+		 * Constructor for the GUI.
+		 */
 		super("Massive spice, SVExchange giveaway helper");
+		this.BuildCoreGUI();
+	}
+	
+	private void BuildCoreGUI() {
+		/* *
+		 * Puts together the core framework for the GUI and lays out the JPanels within the window.
+		 */
 		final JPanel OuterPanel = new JPanel();
 		OuterPanel.setLayout(new GridBagLayout());
 		GridBagConstraints OuterConstraints = new GridBagConstraints();
@@ -70,9 +78,13 @@ public class HelloGoodbye extends JFrame {
 		pack();
 		setVisible(true);
 	}
+	
 	public static void main (final String[] args) {
+		/* *
+		 * Starts up the GUI.
+		 */
 		SwingUtilities.invokeLater(new Runnable() {
-			public void run() { new HelloGoodbye();}
+			public void run() { new CoreGUI();}
 		});
 	}
 }
