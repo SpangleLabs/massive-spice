@@ -17,6 +17,11 @@ import javax.swing.SwingUtilities;
  */
 public class CoreGUI extends JFrame {
 	private static final long serialVersionUID = 1L;
+	private JPanel RightPanel = null;
+	private JPanel ModePanel = null;
+	private JPanel ModeViewPanel = null;
+	private JPanel TodoPanel = null;
+	private JPanel ConfigPanel = null;
 
 	public CoreGUI() {
 		/* *
@@ -33,7 +38,7 @@ public class CoreGUI extends JFrame {
 		final JPanel OuterPanel = new JPanel();
 		OuterPanel.setLayout(new GridBagLayout());
 		GridBagConstraints OuterConstraints = new GridBagConstraints();
-		final JPanel RightPanel = new JPanel();
+		RightPanel = new JPanel();
 		RightPanel.setOpaque(true);
 		RightPanel.setBackground(Color.RED);
 		OuterConstraints.fill = GridBagConstraints.BOTH;
@@ -42,7 +47,7 @@ public class CoreGUI extends JFrame {
 		OuterConstraints.gridy = 0;
 		OuterConstraints.weightx = OuterConstraints.weighty = 1.0;
 		OuterPanel.add(RightPanel, OuterConstraints);
-		final JPanel ModePanel = new JPanel();
+		ModePanel = new JPanel();
 		ModePanel.setOpaque(true);
 		ModePanel.setBackground(Color.GREEN);
 		ModePanel.setPreferredSize(new Dimension(200,50));
@@ -52,20 +57,20 @@ public class CoreGUI extends JFrame {
 		OuterConstraints.gridy = 0;
 		OuterConstraints.weightx = OuterConstraints.weighty = 0;
 		OuterPanel.add(ModePanel, OuterConstraints);
-		final JPanel ModeViewPanel = new JPanel();
+		ModeViewPanel = new JPanel();
 		ModeViewPanel.setOpaque(true);
 		ModeViewPanel.setBackground(Color.YELLOW);
 		ModeViewPanel.setPreferredSize(new Dimension(200,100));
 		OuterConstraints.gridy = 1;
 		OuterPanel.add(ModeViewPanel, OuterConstraints);
-		final JPanel TodoPanel = new JPanel();
+		TodoPanel = new JPanel();
 		TodoPanel.setOpaque(true);
 		TodoPanel.setBackground(Color.GRAY);
 		TodoPanel.setPreferredSize(new Dimension(200,100));
 		OuterConstraints.gridy = 2;
 		OuterConstraints.weighty = 1.0;
 		OuterPanel.add(TodoPanel, OuterConstraints);
-		final JPanel ConfigPanel = new JPanel();
+		ConfigPanel = new JPanel();
 		ConfigPanel.setOpaque(true);
 		ConfigPanel.setBackground(Color.CYAN);
 		ConfigPanel.setPreferredSize(new Dimension(200,50));
