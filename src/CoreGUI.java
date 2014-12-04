@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -30,8 +31,19 @@ public class CoreGUI extends JFrame {
 		 */
 		super("Massive spice, SVExchange giveaway helper");
 		this.BuildCoreGUI();
+		this.BuildModePanel();
 		this.BuildTodoPanel();
 		this.BuildConfigPanel();
+	}
+	
+	private void BuildModePanel() {
+		ModePanel.setLayout(new GridLayout(1,2));
+		JButton Giveaways = new JButton("Giveaways");
+		ModePanel.add(Giveaways);
+		JButton HatchRequests = new JButton("<html><div align='center'>Hatch<br />requests</div></html>");
+		ModePanel.add(HatchRequests);
+		//JButton Logout = new JButton("???");
+		//ModePanel.add(Logout);
 	}
 	
 	private void BuildTodoPanel() {
@@ -42,11 +54,14 @@ public class CoreGUI extends JFrame {
 	
 	private void BuildConfigPanel() {
 		ConfigPanel.setLayout(new GridLayout(1,3));
-		JButton ConfigMessage = new JButton("Config msg");
+		JButton ConfigMessage = new JButton("<html><div align='center'>Change<br />messages</div></html>");
+		ConfigMessage.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(ConfigMessage);
-		JButton NewGiveaway = new JButton("New giveaway");
+		JButton NewGiveaway = new JButton("<html><div align='center'>New<br />giveaway</div></html>");
+		NewGiveaway.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(NewGiveaway);
 		JButton Logout = new JButton("Logout");
+		Logout.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(Logout);
 	}
 	
