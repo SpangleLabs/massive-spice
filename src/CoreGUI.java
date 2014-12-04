@@ -5,6 +5,10 @@ import java.awt.GridBagLayout;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 
+import java.awt.GridLayout;
+
+
+import javax.swing.JButton;
 //import javax.swing.JButton;
 import javax.swing.JFrame;
 //import javax.swing.JLabel;
@@ -29,6 +33,17 @@ public class CoreGUI extends JFrame {
 		 */
 		super("Massive spice, SVExchange giveaway helper");
 		this.BuildCoreGUI();
+		this.BuildConfigPanel();
+	}
+	
+	private void BuildConfigPanel() {
+		ConfigPanel.setLayout(new GridLayout(1,3));
+		JButton ConfigMessage = new JButton("Config msg");
+		ConfigPanel.add(ConfigMessage);
+		JButton NewGiveaway = new JButton("New giveaway");
+		ConfigPanel.add(NewGiveaway);
+		JButton Logout = new JButton("Logout");
+		ConfigPanel.add(Logout);
 	}
 	
 	private void BuildCoreGUI() {
