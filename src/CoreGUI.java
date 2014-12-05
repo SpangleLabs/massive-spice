@@ -11,6 +11,8 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
@@ -24,6 +26,7 @@ public class CoreGUI extends JFrame {
 	private JPanel ModeViewPanel = null;
 	private JPanel TodoPanel = null;
 	private JPanel ConfigPanel = null;
+	private Web_int WebInt = null;
 
 	public CoreGUI() {
 		/* *
@@ -34,9 +37,47 @@ public class CoreGUI extends JFrame {
 		this.BuildModePanel();
 		this.BuildTodoPanel();
 		this.BuildConfigPanel();
+		DrawRightLoginPanel();
+	}
+	
+	private void DrawRightLoginPanel() {
+		/* *
+		 * Draws login panel for the right block.
+		 */
+		RightPanel.removeAll();
+		RightPanel.setLayout(new GridBagLayout());
+		GridBagConstraints RightConstraints = new GridBagConstraints();
+		JLabel LoginTitle = new JLabel("Log in to reddit:");
+		RightConstraints.gridx = 0;
+		RightConstraints.gridy = 0;
+		RightConstraints.gridwidth = 2;
+		RightPanel.add(LoginTitle,RightConstraints);
+		JLabel LoginUsername = new JLabel("Username:");
+		RightConstraints.gridx = 0;
+		RightConstraints.gridy = 1;
+		RightConstraints.gridwidth = 1;
+		RightPanel.add(LoginUsername,RightConstraints);
+		JTextField Username = new JTextField(20);
+		RightConstraints.gridx = 1;
+		RightPanel.add(Username,RightConstraints);
+		JLabel LoginPassword = new JLabel("Password:");
+		RightConstraints.gridx = 0;
+		RightConstraints.gridy = 2;
+		RightPanel.add(LoginPassword,RightConstraints);
+		JPasswordField Password = new JPasswordField(20);
+		RightConstraints.gridx = 1;
+		RightPanel.add(Password,RightConstraints);
+		JButton LoginButton = new JButton("Login");
+		RightConstraints.gridx = 0;
+		RightConstraints.gridy = 3;
+		RightConstraints.gridwidth = 2;
+		RightPanel.add(LoginButton,RightConstraints);
 	}
 	
 	private void BuildModePanel() {
+		/* *
+		 * Draws the mode selection panel, the header of the left column.
+		 */
 		ModePanel.setLayout(new GridLayout(1,2));
 		JButton Giveaways = new JButton("Giveaways");
 		ModePanel.add(Giveaways);
@@ -47,12 +88,19 @@ public class CoreGUI extends JFrame {
 	}
 	
 	private void BuildTodoPanel() {
+		/* *
+		 * Draws the todo list panel.
+		 */
 		TodoPanel.setLayout(new FlowLayout());
 		JLabel TodoTitle = new JLabel("Todo list:",SwingConstants.CENTER);
 		TodoPanel.add(TodoTitle,BorderLayout.NORTH);
 	}
 	
 	private void BuildConfigPanel() {
+		/* *
+		 * Draws the config panel, at the bottom of the left column.
+		 */
+		ConfigPanel.removeAll();
 		ConfigPanel.setLayout(new GridLayout(1,3));
 		JButton ConfigMessage = new JButton("<html><div align='center'>Change<br />messages</div></html>");
 		ConfigMessage.setMargin(new Insets(0,0,0,0));
@@ -60,7 +108,13 @@ public class CoreGUI extends JFrame {
 		JButton NewGiveaway = new JButton("<html><div align='center'>New<br />giveaway</div></html>");
 		NewGiveaway.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(NewGiveaway);
-		JButton Logout = new JButton("Logout");
+		String LoginMessage;
+		if(WebInt == null) {
+			LoginMessage = "Login";
+		} else {
+			LoginMessage = "Logout";
+		}
+		JButton Logout = new JButton(LoginMessage);
 		Logout.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(Logout);
 	}
