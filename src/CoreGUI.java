@@ -78,6 +78,7 @@ public class CoreGUI extends JFrame {
 				String InputUsername = Username.getText();
 				String InputPassword = Password.getPassword().toString();
 				WebInt = new Web_int(InputUsername,InputPassword);
+				BuildConfigPanel();
 			}
 		});
 		revalidate();
@@ -119,17 +120,25 @@ public class CoreGUI extends JFrame {
 		NewGiveaway.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(NewGiveaway);
 		String LoginMessage;
+		JButton Logout;
 		if(WebInt == null) {
 			LoginMessage = "Login";
+			Logout = new JButton(LoginMessage);
+			Logout.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					DrawRightLoginPanel();
+				}
+			});
 		} else {
 			LoginMessage = "Logout";
+			Logout = new JButton(LoginMessage);
+			Logout.addActionListener(new ActionListener() {
+				public void actionPerformed(final ActionEvent e) {
+					WebInt = null;
+					BuildConfigPanel();
+				}
+			});
 		}
-		JButton Logout = new JButton(LoginMessage);
-		Logout.addActionListener(new ActionListener() {
-			public void actionPerformed(final ActionEvent e) {
-				DrawRightLoginPanel();
-			}
-		});
 		Logout.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(Logout);
 	}
