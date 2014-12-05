@@ -41,7 +41,7 @@ public class CoreGUI extends JFrame {
 		this.BuildConfigPanel();
 	}
 	
-	public final void DrawRightLoginPanel() {
+	public final void DrawRightPanelLogin() {
 		/* *
 		 * Draws login panel for the right block.
 		 */
@@ -76,7 +76,7 @@ public class CoreGUI extends JFrame {
 		ActionListener LoginAction = new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				String InputUsername = Username.getText();
-				String InputPassword = Password.getPassword().toString();
+				String InputPassword = String.valueOf(Password.getPassword());
 				WebInt = new Web_int(InputUsername,InputPassword);
 				BuildConfigPanel();
 			}
@@ -128,7 +128,7 @@ public class CoreGUI extends JFrame {
 			Logout = new JButton(LoginMessage);
 			Logout.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
-					DrawRightLoginPanel();
+					DrawRightPanelLogin();
 				}
 			});
 		} else {
