@@ -29,7 +29,12 @@ public class Web_int {
 			return false;
 		}
 		JSONObject login_reply_data = (JSONObject) login_reply_objj.get("data");
-		this.modhash = (String) login_reply_data.get("modhash");
+		try {
+			this.modhash = (String) login_reply_data.get("modhash");
+		} catch (NullPointerException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		return true;
 	}
 	
