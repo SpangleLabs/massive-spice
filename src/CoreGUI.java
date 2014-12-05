@@ -73,14 +73,16 @@ public class CoreGUI extends JFrame {
 		RightConstraints.gridy = 3;
 		RightConstraints.gridwidth = 2;
 		RightPanel.add(LoginButton,RightConstraints);
-		LoginButton.addActionListener(new ActionListener() {
+		ActionListener LoginAction = new ActionListener() {
 			public void actionPerformed(final ActionEvent e) {
 				String InputUsername = Username.getText();
 				String InputPassword = Password.getPassword().toString();
 				WebInt = new Web_int(InputUsername,InputPassword);
 				BuildConfigPanel();
 			}
-		});
+		};
+		Password.addActionListener(LoginAction);
+		LoginButton.addActionListener(LoginAction);
 		revalidate();
 		repaint();
 	}
