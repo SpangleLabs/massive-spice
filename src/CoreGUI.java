@@ -45,8 +45,7 @@ public class CoreGUI extends JFrame {
 		/* *
 		 * Draws login panel for the right block.
 		 */
-		System.out.println("Draw right");
-		//RightPanel.removeAll();
+		RightPanel.removeAll();
 		RightPanel.setLayout(new GridBagLayout());
 		GridBagConstraints RightConstraints = new GridBagConstraints();
 		JLabel LoginTitle = new JLabel("Log in to reddit:");
@@ -74,7 +73,8 @@ public class CoreGUI extends JFrame {
 		RightConstraints.gridy = 3;
 		RightConstraints.gridwidth = 2;
 		RightPanel.add(LoginButton,RightConstraints);
-		System.out.println("Drawn right");
+		revalidate();
+		repaint();
 	}
 	
 	private void BuildModePanel() {
