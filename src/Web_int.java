@@ -8,6 +8,10 @@ import org.json.simple.JSONValue;
 public class Web_int {
 	private String modhash;
 	
+	public void Web_int(String username,String password) {
+		this.login(username, password);
+	}
+	
 	public boolean login(String username,String password) {
 		/* *
 		 * Logs into reddit and stores the modhash in class variables.
