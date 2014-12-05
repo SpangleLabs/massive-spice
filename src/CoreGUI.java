@@ -89,6 +89,7 @@ public class CoreGUI extends JFrame {
 				String InputPassword = String.valueOf(Password.getPassword());
 				WebInt = new Web_int(InputUsername,InputPassword);
 				BuildConfigPanel();
+				DrawRightPanelBlank();
 			}
 		};
 		Password.addActionListener(LoginAction);
@@ -153,6 +154,8 @@ public class CoreGUI extends JFrame {
 		}
 		Logout.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(Logout);
+		revalidate();
+		repaint();
 	}
 	
 	private void BuildCoreGUI() {
