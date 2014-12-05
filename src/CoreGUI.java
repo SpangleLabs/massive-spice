@@ -58,14 +58,14 @@ public class CoreGUI extends JFrame {
 		RightConstraints.gridy = 1;
 		RightConstraints.gridwidth = 1;
 		RightPanel.add(LoginUsername,RightConstraints);
-		JTextField Username = new JTextField(20);
+		final JTextField Username = new JTextField(20);
 		RightConstraints.gridx = 1;
 		RightPanel.add(Username,RightConstraints);
 		JLabel LoginPassword = new JLabel("Password:");
 		RightConstraints.gridx = 0;
 		RightConstraints.gridy = 2;
 		RightPanel.add(LoginPassword,RightConstraints);
-		JPasswordField Password = new JPasswordField(20);
+		final JPasswordField Password = new JPasswordField(20);
 		RightConstraints.gridx = 1;
 		RightPanel.add(Password,RightConstraints);
 		JButton LoginButton = new JButton("Login");
@@ -73,10 +73,17 @@ public class CoreGUI extends JFrame {
 		RightConstraints.gridy = 3;
 		RightConstraints.gridwidth = 2;
 		RightPanel.add(LoginButton,RightConstraints);
+		LoginButton.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				String InputUsername = Username.getText();
+				String InputPassword = Password.getPassword().toString();
+				WebInt = new Web_int(InputUsername,InputPassword);
+			}
+		});
 		revalidate();
 		repaint();
 	}
-	
+
 	private void BuildModePanel() {
 		/* *
 		 * Draws the mode selection panel, the header of the left column.
