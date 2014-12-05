@@ -39,6 +39,16 @@ public class CoreGUI extends JFrame {
 		this.BuildModePanel();
 		this.BuildTodoPanel();
 		this.BuildConfigPanel();
+		this.DrawRightPanelBlank();
+	}
+	
+	public final void DrawRightPanelBlank() {
+		/* *
+		 * Draws blank panel for the right block.
+		 */
+		RightPanel.removeAll();
+		revalidate();
+		repaint();
 	}
 	
 	public final void DrawRightPanelLogin() {
