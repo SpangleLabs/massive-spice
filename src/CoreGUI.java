@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -37,21 +39,21 @@ public class CoreGUI extends JFrame {
 		this.BuildModePanel();
 		this.BuildTodoPanel();
 		this.BuildConfigPanel();
-		DrawRightLoginPanel();
 	}
 	
-	private void DrawRightLoginPanel() {
+	public final void DrawRightLoginPanel() {
 		/* *
 		 * Draws login panel for the right block.
 		 */
-		RightPanel.removeAll();
+		System.out.println("Draw right");
+		//RightPanel.removeAll();
 		RightPanel.setLayout(new GridBagLayout());
 		GridBagConstraints RightConstraints = new GridBagConstraints();
 		JLabel LoginTitle = new JLabel("Log in to reddit:");
 		RightConstraints.gridx = 0;
 		RightConstraints.gridy = 0;
 		RightConstraints.gridwidth = 2;
-		RightPanel.add(LoginTitle,RightConstraints);
+		this.RightPanel.add(LoginTitle,RightConstraints);
 		JLabel LoginUsername = new JLabel("Username:");
 		RightConstraints.gridx = 0;
 		RightConstraints.gridy = 1;
@@ -72,6 +74,7 @@ public class CoreGUI extends JFrame {
 		RightConstraints.gridy = 3;
 		RightConstraints.gridwidth = 2;
 		RightPanel.add(LoginButton,RightConstraints);
+		System.out.println("Drawn right");
 	}
 	
 	private void BuildModePanel() {
@@ -115,6 +118,11 @@ public class CoreGUI extends JFrame {
 			LoginMessage = "Logout";
 		}
 		JButton Logout = new JButton(LoginMessage);
+		Logout.addActionListener(new ActionListener() {
+			public void actionPerformed(final ActionEvent e) {
+				DrawRightLoginPanel();
+			}
+		});
 		Logout.setMargin(new Insets(0,0,0,0));
 		ConfigPanel.add(Logout);
 	}
