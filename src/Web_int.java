@@ -61,5 +61,16 @@ public class Web_int {
 		this.modhash = (String) inbox_data.get("modhash");
 		return (JSONArray) inbox_data.get("children");
 	}
+	
+	public JSONArray list_submissions() {
+		/* *
+		 * Gets the list of posts submitted by the current user.
+		 */
+		String list_response = Web.get_page("http://www.reddit.com/user/"+this.username+"/submitted.json");
+		JSONObject list_obj = (JSONObject) JSONValue.parse(list_response);
+		JSONObject list_data = (JSONObject) list_obj.get("data");
+		this.modhash = (String) list_data.get("modhash");
+		return (JSONArray) list_data.get("children");
+	}
 
 }
