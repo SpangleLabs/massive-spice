@@ -7,8 +7,10 @@ import org.json.simple.JSONValue;
 
 public class Web_int {
 	private String modhash;
+	private String username;
 
 	public Web_int(String username,String password) {
+		this.username = username;
 		this.login(username, password);
 	}
 	
