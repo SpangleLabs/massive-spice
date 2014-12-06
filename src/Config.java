@@ -49,7 +49,7 @@ public class Config {
 			xml_dump += "   <Reply>"+message.get("reply")+"</Reply>\r\n";
 			xml_dump += "  </Message>\r\n";
 		}
-		xml_dump += "</Messages>";
+		xml_dump += " </Messages>";
 		this.save_file("config/messages.xml",xml_dump);
 	}
 	
