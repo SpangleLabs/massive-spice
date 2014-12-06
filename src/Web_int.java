@@ -51,7 +51,7 @@ public class Web_int {
 		return (JSONArray) list_data.get("children");
 	}
 	
-	public JSONArray list_inbox() {]
+	public JSONArray list_inbox() {
 		/* *
 		 * Gets entire list of messages from inbox.
 		 */
