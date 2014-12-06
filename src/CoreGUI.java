@@ -97,6 +97,15 @@ public class CoreGUI extends JFrame {
 		revalidate();
 		repaint();
 	}
+	
+	public final void DrawRightPanelConfig() {
+		/* *
+		 * Draws message config panel for the right block.
+		 */
+		RightPanel.removeAll();
+		revalidate();
+		repaint();
+	}
 
 	private void BuildModePanel() {
 		/* *
