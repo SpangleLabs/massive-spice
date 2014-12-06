@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class Config {
@@ -51,6 +53,28 @@ public class Config {
 		}
 		xml_dump += " </Messages>";
 		this.save_file("config/messages.xml",xml_dump);
+	}
+	
+	public void read_xml() {
+		/* *
+		 * Reads the messages array from an xml file in the config directory.
+		 */
+		String data = null;
+		ArrayList<HashMap<String,String>> new_messages = new ArrayList<HashMap<String,String>>(); 
+		Pattern pattern_messages = Pattern.compile("<Messages>[\\s\\S]*?<\\/Messages>");
+		Pattern pattern_message = Pattern.compile("<Message>[\\s\\S]*?<\\/Message>");
+		Pattern pattern_title = Pattern.compile("<Title>[\\s\\S]*?<\\/Title>");
+		Pattern pattern_regex = Pattern.compile("<Regex>[\\s\\S]*?<\\/Regex>");
+		Pattern pattern_reply = Pattern.compile("<Reply>[\\s\\S]*?<\\/Reply>");
+		Matcher matcher_messages = pattern_messages.matcher(data);
+		boolean found = false;
+		while(matcher_messages.find()) {
+			found = true;
+		}
+		if(!found) {
+			System.out.println("Failed to load XML.");
+		}
+		
 	}
 	
 	public void set_last_inbox_message(String last_message) {
