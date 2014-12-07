@@ -81,9 +81,6 @@ public class Config {
 				HashMap<String,String> new_message = new HashMap<String,String>();
 				Node node_message = doc_messages.item(temp);
 				Element element_message = (Element) node_message;
-				System.out.println("title"+element_message.getElementsByTagName("Title").item(0).getTextContent());
-				System.out.println("regex"+element_message.getElementsByTagName("Regex").item(0).getTextContent());
-				System.out.println("reply"+element_message.getElementsByTagName("Reply").item(0).getTextContent());
 				new_message.put("title",element_message.getElementsByTagName("Title").item(0).getTextContent());
 				new_message.put("regex",element_message.getElementsByTagName("Regex").item(0).getTextContent());
 				new_message.put("reply",element_message.getElementsByTagName("Reply").item(0).getTextContent());
