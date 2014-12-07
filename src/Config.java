@@ -10,6 +10,7 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -18,6 +19,11 @@ import org.w3c.dom.NodeList;
 public class Config {
 	private String last_inbox_message = null;
 	private ArrayList<HashMap<String,String>> messages = new ArrayList<HashMap<String,String>>();
+	
+	public Config() {
+		this.read_xml_messages();
+		this.save_xml_messages();
+	}
 	
 	private void generate_config_dir() {
 		/* *
@@ -46,21 +52,47 @@ public class Config {
 		}
 	}
 	
-	public void save_xml() {
+	public void save_xml_messages() {
 		/* *
 		 * Saves the messages array to an xml file in the config directory.
 		 */
 		this.generate_config_dir();
-		String xml_dump = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\r\n <Messages>\r\n";
+		String xml_dump = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\" ?>\r\n<Messages>\r\n";
 		for(HashMap<String,String> message : messages) {
-			xml_dump += "  <Message>\r\n";
-			xml_dump += "   <Title>"+message.get("title")+"</Title>\r\n";
-			xml_dump += "   <Regex>"+message.get("regex")+"</Regex>\r\n";
-			xml_dump += "   <Reply>"+message.get("reply")+"</Reply>\r\n";
-			xml_dump += "  </Message>\r\n";
+			xml_dump += " <Message>\r\n";
+			xml_dump += "  <Title>"+message.get("title")+"</Title>\r\n";
+			xml_dump += "  <Regex>"+message.get("regex")+"</Regex>\r\n";
+			xml_dump += "  <Reply>"+message.get("reply")+"</Reply>\r\n";
+			xml_dump += " </Message>\r\n";
 		}
-		xml_dump += " </Messages>";
+		xml_dump += "</Messages>";
 		this.save_file("config/messages.xml",xml_dump);
+	}
+	
+	public void read_xml_messages() {
+		try {
+			ArrayList<HashMap<String,String>> new_messages = new ArrayList<HashMap<String,String>>();
+			File file = new File("config/messages.xml");
+			DocumentBuilder DocBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = DocBuilder.parse(file);
+			Element doc_element = doc.getDocumentElement();
+			NodeList doc_messages = doc_element.getElementsByTagName("Message");
+			for(int temp = 0; temp<doc_messages.getLength(); temp++) {
+				HashMap<String,String> new_message = new HashMap<String,String>();
+				Node node_message = doc_messages.item(temp);
+				Element element_message = (Element) node_message;
+				System.out.println("title"+element_message.getElementsByTagName("Title").item(0).getTextContent());
+				System.out.println("regex"+element_message.getElementsByTagName("Regex").item(0).getTextContent());
+				System.out.println("reply"+element_message.getElementsByTagName("Reply").item(0).getTextContent());
+				new_message.put("title",element_message.getElementsByTagName("Title").item(0).getTextContent());
+				new_message.put("regex",element_message.getElementsByTagName("Regex").item(0).getTextContent());
+				new_message.put("reply",element_message.getElementsByTagName("Reply").item(0).getTextContent());
+				new_messages.add(new_message);
+			}
+			this.messages = new_messages;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void read_xml() {
@@ -118,17 +150,6 @@ public class Config {
 	    } catch (Exception e) {
 	    	System.out.println(e.getMessage());
 	    }
-	}
-	
-	public static void read_xml_messages() {
-		try {
-			File file = new File("config/messages.xml");
-			DocumentBuilder DocBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-			Document doc = DocBuilder.parse(file);
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public static void read_xml2node(NodeList nodeList) {
