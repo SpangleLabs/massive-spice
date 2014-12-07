@@ -225,7 +225,7 @@ public class CoreGUI extends JFrame {
 		/* *
 		 * Starts up the GUI.
 		 */
-		Config.read_xml2();
+		Config conf = new Config();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() { new CoreGUI();}
 		});
