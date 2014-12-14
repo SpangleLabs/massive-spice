@@ -90,6 +90,7 @@ public class CoreGUI extends JFrame {
 				String InputUsername = Username.getText();
 				String InputPassword = String.valueOf(Password.getPassword());
 				WebInt = new Web_int(InputUsername,InputPassword);
+				Conf.load_user(InputUsername);
 				BuildConfigPanel();
 				DrawRightPanelBlank();
 			}
@@ -159,6 +160,7 @@ public class CoreGUI extends JFrame {
 			Logout.addActionListener(new ActionListener() {
 				public void actionPerformed(final ActionEvent e) {
 					WebInt = null;
+					Conf.load_user(null);
 					BuildConfigPanel();
 				}
 			});
