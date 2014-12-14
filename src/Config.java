@@ -19,6 +19,7 @@ import org.w3c.dom.NodeList;
 public class Config {
 	private String last_inbox_message = null;
 	private ArrayList<HashMap<String,String>> messages = new ArrayList<HashMap<String,String>>();
+	private ArrayList<HashMap<String,String>> giveaways = new ArrayList<HashMap<String,String>>();
 	
 	public Config() {
 		this.read_xml_messages();
@@ -194,6 +195,14 @@ public class Config {
 		 * Returns the full list of messages.
 		 */
 		return this.messages;
+	}
+
+	public void load_user(String username) {
+		// TODO Auto-generated method stub
+		if(username == null) {
+			giveaways = new ArrayList<HashMap<String,String>>();
+		}
+		//else, load up giveaways from some file. Construct a giveaway object first.
 	}
 
 }
