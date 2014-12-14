@@ -29,12 +29,14 @@ public class CoreGUI extends JFrame {
 	private JPanel TodoPanel = null;
 	private JPanel ConfigPanel = null;
 	private Web_int WebInt = null;
+	private Config Conf = null;
 
 	public CoreGUI() {
 		/* *
 		 * Constructor for the GUI.
 		 */
 		super("Massive spice, SVExchange giveaway helper");
+		this.Conf = new Config();
 		this.BuildCoreGUI();
 		this.BuildModePanel();
 		this.BuildTodoPanel();
@@ -225,7 +227,6 @@ public class CoreGUI extends JFrame {
 		/* *
 		 * Starts up the GUI.
 		 */
-		Config conf = new Config();
 		SwingUtilities.invokeLater(new Runnable() {
 			public void run() { new CoreGUI();}
 		});
