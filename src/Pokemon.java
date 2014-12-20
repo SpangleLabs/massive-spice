@@ -18,4 +18,5 @@ public class Pokemon {
 	private String ESV = null;
 	private String ability = null;
 	private String gender = null;
+	private boolean egg = null;
 }
