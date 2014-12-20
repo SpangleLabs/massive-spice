@@ -1,3 +1,5 @@
+package DataObjects;
+
 
 public class GiveawayPokemon extends Pokemon {
 	private boolean giveaway_reserved = null;

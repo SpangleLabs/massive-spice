@@ -1,3 +1,4 @@
+package DataObjects;
 
 public class Pokemon {
 	private String species = null;

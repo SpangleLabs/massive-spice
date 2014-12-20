@@ -1,3 +1,4 @@
+package DataObjects;
 
 public class Giveaway {
 	private String title = null;
