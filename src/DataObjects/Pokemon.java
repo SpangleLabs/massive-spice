@@ -157,6 +157,32 @@ public class Pokemon {
 			IVSpe = iVSpe;
 		}
 	}
+	public String getIVString() {
+		/* *
+		 * Returns the IV string.
+		 */
+		String IVString = IVHP.toString()+".";
+		IVString += IVAtk.toString()+".";
+		IVString += IVDef.toString()+".";
+		IVString += IVSpA.toString()+".";
+		IVString += IVSpD.toString()+".";
+		IVString += IVSpe.toString();
+		return IVString;
+	}
+	public void setIVString(String IVString) {
+		/* *
+		 * Sets all the IVs at once, using standard format IV strings.
+		 */
+		if(IVString.length()!=17) {
+			return;
+		}
+		this.IVHP = Integer.parseInt(IVString.substring(0,2));
+		this.IVAtk = Integer.parseInt(IVString.substring(3,5));
+		this.IVDef = Integer.parseInt(IVString.substring(6,8));
+		this.IVSpA = Integer.parseInt(IVString.substring(9,11));
+		this.IVSpD = Integer.parseInt(IVString.substring(12,13));
+		this.IVSpe = Integer.parseInt(IVString.substring(15,17));
+	}
 	public String getMove1() {
 		/* *
 		 * Returns the first move.
