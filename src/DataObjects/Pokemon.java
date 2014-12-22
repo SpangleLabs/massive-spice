@@ -169,6 +169,15 @@ public class Pokemon {
 		IVString += IVSpe.toString();
 		return IVString;
 	}
+	public String getIVStringBold() {
+		/* *
+		 * Returns the IV string, with 31s in bold.
+		 */
+		String IVString = this.getIVString();
+		IVString = IVString.replace("31", "**31**");
+		IVString = IVString.replace("**.**",".");
+		return IVString;
+	}
 	public void setIVString(String IVString) {
 		/* *
 		 * Sets all the IVs at once, using standard format IV strings.
