@@ -192,6 +192,33 @@ public class Pokemon {
 		this.IVSpD = Integer.parseInt(IVString.substring(12,13));
 		this.IVSpe = Integer.parseInt(IVString.substring(15,17));
 	}
+	public String getHiddenPowerType() {
+		/* *
+		 * Returns the type of the pokemon's hidden power.
+		 * It is calculated from the pokemon's IVs
+		 */
+		Integer TypeValue = IVHP%2+(2*(IVAtk%2))+(4*(IVDef%2))+(8*(IVSpe%2))+(16*(IVSpA%2))+(32*(IVSpD));
+		TypeValue = (TypeValue*15)/63;
+		switch (TypeValue) {
+			case 0: return "Fighting";
+			case 1: return "Flying"; 
+			case 2: return "Posion";
+			case 3: return "Ground";
+			case 4: return "Rock";
+			case 5: return "Bug";
+			case 6: return "Ghost";
+			case 7: return "Steel";
+			case 8: return "Fire";
+			case 9: return "Water";
+			case 10: return "Grass";
+			case 11: return "Electric";
+			case 12: return "Psychic";
+			case 13: return "Ice";
+			case 14: return "Dragon";
+			case 15: return "Dark";
+			default: return null;
+		}
+	}
 	public String getMove1() {
 		/* *
 		 * Returns the first move.
