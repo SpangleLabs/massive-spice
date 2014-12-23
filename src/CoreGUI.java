@@ -18,6 +18,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.SwingUtilities;
 
+import Web.Web_int;
+
 /**
  * Core GUI, gently building a swing GUI for the massive spice project.
  */
