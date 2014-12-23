@@ -1,7 +1,6 @@
 package DataObjects;
 
-public class Pokemon {
-	private String Species = null;
+public class Pokemon extends PokemonSpecies {
 	private Integer CoordBox = null;
 	private Integer CoordRow = null;
 	private Integer CoordCol = null;
