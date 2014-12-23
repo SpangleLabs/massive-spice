@@ -20,18 +20,6 @@ public class Pokemon extends PokemonSpecies {
 	private String Gender = null;
 	private Boolean Egg = null;
 	
-	public String getSpecies() {
-		/* *
-		 * Returns the species name
-		 */
-		return Species;
-	}
-	public void setSpecies(String species) {
-		/* *
-		 * Sets the pokemon's species
-		 */
-		Species = species;
-	}
 	public Integer getCoordBox() {
 		/* *
 		 * Returns the box the pokemon is in.
