@@ -1,6 +1,9 @@
 package DataObjects;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -13,9 +16,14 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 
+import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
+
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+import org.xml.sax.SAXException;
 
 import Web.Web;
 
@@ -96,6 +104,33 @@ public class PokemonSpecies {
 		} catch (TransformerException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public static PokemonSpecies loadFromXML(Integer dexNumber) {
+		PokemonSpecies PokemonObject = new PokemonSpecies();
+		try {
+			String filename = "config/pokemon/"+String.format("%04d",dexNumber)+".xml";
+			File file = new File(filename);
+			DocumentBuilder DocBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = DocBuilder.parse(file);
+			Element rootElement = doc.getDocumentElement();
+			PokemonObject.setSpeciesName(rootElement.getElementsByTagName("SpeciesName").item(0).getTextContent());
+			PokemonObject.setDexNational(Integer.parseInt(rootElement.getElementsByTagName("DexNational").item(0).getTextContent()));
+			PokemonObject.setType1(rootElement.getElementsByTagName("Type1").item(0).getTextContent());
+			PokemonObject.setType2(rootElement.getElementsByTagName("Type2").item(0).getTextContent());
+			PokemonObject.setEggCycles(Integer.parseInt(rootElement.getElementsByTagName("EggCycles").item(0).getTextContent()));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (DOMException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return PokemonObject;
 	}
 	
 	public String getSpeciesName() {
