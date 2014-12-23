@@ -1,11 +1,41 @@
 package DataObjects;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import Web.Web;
+
 public class PokemonSpecies {
 	private String SpeciesName = null;
 	private Integer DexNational = null;
 	private String Type1 = null;
 	private String Type2 = null;
-	private String EggCycles = null;
+	private Integer EggCycles = null;
+	
+	public void loadFromBulbapedia(String species) {
+		/* *
+		 * Loads a pokemon's species information from bulbapedia.
+		 */
+		String url = "http://bulbapedia.bulbagarden.net/w/index.php?title="+species+"_%28Pok%C3%A9mon%29&action=edit";
+		String code = Web.get_page(url);
+		code = code.split("{{Pokémon Infobox")[1];
+		code = code.split("}}")[0];
+		Pattern SpeciesNamePattern = Pattern.compile("\\Wname=([^|]*)");
+		Matcher SpeciesNameMatcher = SpeciesNamePattern.matcher(code);
+		this.SpeciesName = SpeciesNameMatcher.group(1).trim();
+		Pattern DexNationalPattern = Pattern.compile("\\Wndex=([^ |]*)");
+		Matcher DexNationalMatcher = DexNationalPattern.matcher(code);
+		this.DexNational = Integer.parseInt(DexNationalMatcher.group(1).trim());
+		Pattern Type1Pattern = Pattern.compile("\\Wtype1=([^ |]*)");
+		Matcher Type1Matcher = Type1Pattern.matcher(code);
+		this.Type1 = Type1Matcher.group(1).trim();
+		Pattern Type2Pattern = Pattern.compile("\\Wtype2=([^ |]*)");
+		Matcher Type2Matcher = Type2Pattern.matcher(code);
+		this.Type2 = Type2Matcher.group(1).trim();
+		Pattern EggCyclesPattern = Pattern.compile("\\Weggcycles=([^ |]*)");
+		Matcher EggCyclesMatcher = EggCyclesPattern.matcher(code);
+		this.EggCycles = Integer.parseInt(EggCyclesMatcher.group(1).trim());
+	}
 	
 	public String getSpeciesName() {
 		/* *
@@ -55,14 +85,14 @@ public class PokemonSpecies {
 		 */
 		Type2 = type2;
 	}
-	public String getEggCycles() {
+	public Integer getEggCycles() {
 		/* *
 		 * Returns the number of egg cycles it takes to hatch an egg.
 		 * One cycle is 255 steps.
 		 */
 		return EggCycles;
 	}
-	public void setEggCycles(String eggCycles) {
+	public void setEggCycles(Integer eggCycles) {
 		/* *
 		 * Sets the number of egg cycles required to hatch an egg.
 		 */
