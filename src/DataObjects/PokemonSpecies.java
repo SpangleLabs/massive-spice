@@ -36,7 +36,7 @@ public class PokemonSpecies {
 		 */
 		String url = "http://bulbapedia.bulbagarden.net/w/index.php?title="+species+"_%28Pok%C3%A9mon%29&action=edit";
 		String code = Web.get_page(url);
-		Pattern CodePattern = Pattern.compile("\\{\\{Pok[^m]{1,2}mon Infobox([\\w\\W]*?)}}[^|]{3}");
+		Pattern CodePattern = Pattern.compile("\\{\\{Pok[^m]{1,2}mon Infobox([\\w\\W]*?)}}[^|]{0,3}\n");
 		Matcher CodeMatcher = CodePattern.matcher(code);
 		CodeMatcher.find();
 		code = CodeMatcher.group(1);
