@@ -87,9 +87,11 @@ public class PokemonSpecies {
 			Type1Element.appendChild(Doc.createTextNode(this.Type1));
 			RootElement.appendChild(Type1Element);
 			//add type2?
-			Element Type2Element = Doc.createElement("Type2");
-			Type2Element.appendChild(Doc.createTextNode(this.Type2));
-			RootElement.appendChild(Type2Element);
+			if(this.Type2 != null) {
+				Element Type2Element = Doc.createElement("Type2");
+				Type2Element.appendChild(Doc.createTextNode(this.Type2));
+				RootElement.appendChild(Type2Element);
+			}
 			//add egg cycles
 			Element EggElement = Doc.createElement("EggCycles");
 			EggElement.appendChild(Doc.createTextNode(this.EggCycles.toString()));
