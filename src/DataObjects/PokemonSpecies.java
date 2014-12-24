@@ -2,8 +2,6 @@ package DataObjects;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -20,9 +18,6 @@ import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import Web.Web;
@@ -40,22 +35,29 @@ public class PokemonSpecies {
 		 */
 		String url = "http://bulbapedia.bulbagarden.net/w/index.php?title="+species+"_%28Pok%C3%A9mon%29&action=edit";
 		String code = Web.get_page(url);
-		code = code.split("{{Pokémon Infobox")[1];
-		code = code.split("}}")[0];
+		Pattern CodePattern = Pattern.compile("\\{\\{Pok[^m]{1,2}mon Infobox([^}]*)}}");
+		Matcher CodeMatcher = CodePattern.matcher(code);
+		CodeMatcher.find();
+		code = CodeMatcher.group(1);
 		Pattern SpeciesNamePattern = Pattern.compile("\\Wname=([^|]*)");
 		Matcher SpeciesNameMatcher = SpeciesNamePattern.matcher(code);
+		SpeciesNameMatcher.find();
 		this.SpeciesName = SpeciesNameMatcher.group(1).trim();
 		Pattern DexNationalPattern = Pattern.compile("\\Wndex=([^ |]*)");
 		Matcher DexNationalMatcher = DexNationalPattern.matcher(code);
+		DexNationalMatcher.find();
 		this.DexNational = Integer.parseInt(DexNationalMatcher.group(1).trim());
 		Pattern Type1Pattern = Pattern.compile("\\Wtype1=([^ |]*)");
 		Matcher Type1Matcher = Type1Pattern.matcher(code);
+		Type1Matcher.find();
 		this.Type1 = Type1Matcher.group(1).trim();
 		Pattern Type2Pattern = Pattern.compile("\\Wtype2=([^ |]*)");
 		Matcher Type2Matcher = Type2Pattern.matcher(code);
+		Type2Matcher.find();
 		this.Type2 = Type2Matcher.group(1).trim();
 		Pattern EggCyclesPattern = Pattern.compile("\\Weggcycles=([^ |]*)");
 		Matcher EggCyclesMatcher = EggCyclesPattern.matcher(code);
+		EggCyclesMatcher.find();
 		this.EggCycles = Integer.parseInt(EggCyclesMatcher.group(1).trim());
 	}
 	
@@ -193,5 +195,11 @@ public class PokemonSpecies {
 		 * Sets the number of egg cycles required to hatch an egg.
 		 */
 		EggCycles = eggCycles;
+	}
+
+	public static void main(String[] args) {
+		PokemonSpecies PokemonObject = new PokemonSpecies();
+		PokemonObject.loadFromBulbapedia("Bulbasaur");
+		PokemonObject.saveToXML();
 	}
 }
