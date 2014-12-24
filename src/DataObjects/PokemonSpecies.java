@@ -36,7 +36,7 @@ public class PokemonSpecies {
 		 */
 		String url = "http://bulbapedia.bulbagarden.net/w/index.php?title="+species+"_%28Pok%C3%A9mon%29&action=edit";
 		String code = Web.get_page(url);
-		Pattern CodePattern = Pattern.compile("\\{\\{Pok[^m]{1,2}mon Infobox([^}]*)}}");
+		Pattern CodePattern = Pattern.compile("\\{\\{Pok[^m]{1,2}mon Infobox([\\w\\W]*?)}}[^|]{3}");
 		Matcher CodeMatcher = CodePattern.matcher(code);
 		CodeMatcher.find();
 		code = CodeMatcher.group(1);
@@ -44,20 +44,20 @@ public class PokemonSpecies {
 		Matcher SpeciesNameMatcher = SpeciesNamePattern.matcher(code);
 		SpeciesNameMatcher.find();
 		this.SpeciesName = SpeciesNameMatcher.group(1).trim();
-		Pattern DexNationalPattern = Pattern.compile("\\Wndex=([^ |]*)");
+		Pattern DexNationalPattern = Pattern.compile("\\Wndex=([^|]*)");
 		Matcher DexNationalMatcher = DexNationalPattern.matcher(code);
 		DexNationalMatcher.find();
 		this.DexNational = Integer.parseInt(DexNationalMatcher.group(1).trim());
-		Pattern Type1Pattern = Pattern.compile("\\Wtype1=([^ |]*)");
+		Pattern Type1Pattern = Pattern.compile("\\Wtype1=([^|]*)");
 		Matcher Type1Matcher = Type1Pattern.matcher(code);
 		Type1Matcher.find();
 		this.Type1 = Type1Matcher.group(1).trim();
-		Pattern Type2Pattern = Pattern.compile("\\Wtype2=([^ |]*)");
+		Pattern Type2Pattern = Pattern.compile("\\Wtype2=([^|]*)");
 		Matcher Type2Matcher = Type2Pattern.matcher(code);
 		if(Type2Matcher.find()) {
 			this.Type2 = Type2Matcher.group(1).trim();
 		}
-		Pattern EggCyclesPattern = Pattern.compile("\\Weggcycles=([^ |]*)");
+		Pattern EggCyclesPattern = Pattern.compile("\\Weggcycles=([^|]*)");
 		Matcher EggCyclesMatcher = EggCyclesPattern.matcher(code);
 		EggCyclesMatcher.find();
 		this.EggCycles = Integer.parseInt(EggCyclesMatcher.group(1).trim());
