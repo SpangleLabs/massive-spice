@@ -54,8 +54,9 @@ public class PokemonSpecies {
 		this.Type1 = Type1Matcher.group(1).trim();
 		Pattern Type2Pattern = Pattern.compile("\\Wtype2=([^ |]*)");
 		Matcher Type2Matcher = Type2Pattern.matcher(code);
-		Type2Matcher.find();
-		this.Type2 = Type2Matcher.group(1).trim();
+		if(Type2Matcher.find()) {
+			this.Type2 = Type2Matcher.group(1).trim();
+		}
 		Pattern EggCyclesPattern = Pattern.compile("\\Weggcycles=([^ |]*)");
 		Matcher EggCyclesMatcher = EggCyclesPattern.matcher(code);
 		EggCyclesMatcher.find();
