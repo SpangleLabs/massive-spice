@@ -56,11 +56,11 @@ public class PokemonSpecies {
 		EggCyclesMatcher.find();
 		this.EggCycles = Integer.parseInt(EggCyclesMatcher.group(1).trim());
 	}
-	
+
 	public static PokemonSpecies loadFromXML(Integer dexNumber) {
 		PokemonSpecies PokemonObject = new PokemonSpecies();
 		try {
-			String filename = "config/pokemon/"+String.format("%04d",dexNumber)+".xml";
+			String filename = "config/pokedex.xml";
 			File file = new File(filename);
 			DocumentBuilder DocBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = DocBuilder.parse(file);
@@ -91,7 +91,6 @@ public class PokemonSpecies {
 		}
 		return PokemonObject;
 	}
-	
 	public String getSpeciesName() {
 		/* *
 		 * Returns the species name.
