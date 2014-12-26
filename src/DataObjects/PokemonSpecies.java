@@ -63,55 +63,6 @@ public class PokemonSpecies {
 		this.EggCycles = Integer.parseInt(EggCyclesMatcher.group(1).trim());
 	}
 	
-	public void saveToXML() {
-		/* *
-		 * Saves pokemon species information to XML.
-		 */
-		try {
-			DocumentBuilderFactory DocFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder DocBuilder = DocFactory.newDocumentBuilder();
-			//build root element
-			Document Doc = DocBuilder.newDocument();
-			Element RootElement = Doc.createElement("Pokemon");
-			Doc.appendChild(RootElement);
-			//add Name element
-			Element NameElement = Doc.createElement("SpeciesName");
-			NameElement.appendChild(Doc.createTextNode(this.SpeciesName));
-			RootElement.appendChild(NameElement);
-			//add national dex number
-			Element DexElement = Doc.createElement("DexNational");
-			DexElement.appendChild(Doc.createTextNode(this.DexNational.toString()));
-			RootElement.appendChild(DexElement);
-			//add type1
-			Element Type1Element = Doc.createElement("Type1");
-			Type1Element.appendChild(Doc.createTextNode(this.Type1));
-			RootElement.appendChild(Type1Element);
-			//add type2?
-			if(this.Type2 != null) {
-				Element Type2Element = Doc.createElement("Type2");
-				Type2Element.appendChild(Doc.createTextNode(this.Type2));
-				RootElement.appendChild(Type2Element);
-			}
-			//add egg cycles
-			Element EggElement = Doc.createElement("EggCycles");
-			EggElement.appendChild(Doc.createTextNode(this.EggCycles.toString()));
-			RootElement.appendChild(EggElement);
-			//save the xml to file
-			TransformerFactory transformerFactory = TransformerFactory.newInstance();
-			Transformer transformer = transformerFactory.newTransformer();
-			DOMSource source = new DOMSource(Doc);
-			File dir = new File("config/pokemon");
-			dir.mkdirs();
-			String filename = "config/pokemon/"+String.format("%04d",this.DexNational)+".xml";
-			StreamResult result = new StreamResult(new File(filename));
-			transformer.transform(source, result);
-		} catch (ParserConfigurationException e) {
-			e.printStackTrace();
-		} catch (TransformerException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	public static PokemonSpecies loadFromXML(Integer dexNumber) {
 		PokemonSpecies PokemonObject = new PokemonSpecies();
 		try {
@@ -199,14 +150,5 @@ public class PokemonSpecies {
 		 * Sets the number of egg cycles required to hatch an egg.
 		 */
 		EggCycles = eggCycles;
-	}
-
-	public static void main(String[] args) {
-		List<String> pokemonlist = Arrays.asList("Probopass","Dusknoir","Froslass","Rotom","Rotom","Rotom","Rotom","Rotom","Rotom","Uxie","Mesprit","Azelf","Dialga","Palkia","Heatran","Regigigas","Giratina","Giratina","Cresselia","Phione","Manaphy","Darkrai","Shaymin","Shaymin","Arceus","Victini","Snivy","Servine","Serperior","Tepig","Pignite","Emboar","Oshawott","Dewott","Samurott","Patrat","Watchog","Lillipup","Herdier","Stoutland","Purrloin","Liepard","Pansage","Simisage","Pansear","Simisear","Panpour","Simipour","Munna","Musharna","Pidove","Tranquill","Unfezant","Unfezant","Blitzle","Zebstrika","Roggenrola","Boldore","Gigalith","Woobat","Swoobat","Drilbur","Excadrill","Audino","Timburr","Gurdurr","Conkeldurr","Tympole","Palpitoad","Seismitoad","Throh","Sawk","Sewaddle","Swadloon","Leavanny","Venipede","Whirlipede","Scolipede","Cottonee","Whimsicott","Petilil","Lilligant","Basculin","Basculin","Sandile","Krokorok","Krookodile","Darumaka","Darmanitan","Darmanitan","Maractus","Dwebble","Crustle","Scraggy","Scrafty","Sigilyph","Yamask","Cofagrigus","Tirtouga","Carracosta","Archen","Archeops","Trubbish","Garbodor","Zorua","Zoroark","Minccino","Cinccino","Gothita","Gothorita","Gothitelle","Solosis","Duosion","Reuniclus","Ducklett","Swanna","Vanillite","Vanillish","Vanilluxe","Deerling","Sawsbuck","Emolga","Karrablast","Escavalier","Foongus","Amoonguss","Frillish","Frillish","Jellicent","Jellicent","Alomomola","Joltik","Galvantula","Ferroseed","Ferrothorn","Klink","Klang","Klinklang","Tynamo","Eelektrik","Eelektross","Elgyem","Beheeyem","Litwick","Lampent","Chandelure","Axew","Fraxure","Haxorus","Cubchoo","Beartic","Cryogonal","Shelmet","Accelgor","Stunfisk","Mienfoo","Mienshao","Druddigon","Golett","Golurk","Pawniard","Bisharp","Bouffalant","Rufflet","Braviary","Vullaby","Mandibuzz","Heatmor","Durant","Deino","Zweilous","Hydreigon","Larvesta","Volcarona","Cobalion","Terrakion","Virizion","Tornadus","Thundurus","Reshiram","Zekrom","Landorus","Kyurem","Keldeo","Meloetta","Meloetta","Genesect","Chespin","Quilladin","Chesnaught","Fennekin","Braixen","Delphox","Froakie","Frogadier","Greninja","Bunnelby","Diggersby","Fletchling","Fletchinder","Talonflame","Scatterbug","Spewpa","Vivillon","Litleo","Pyroar","Flabébé","Floette","Florges","Skiddo","Gogoat","Pancham","Pangoro","Furfrou","Espurr","Meowstic","Honedge","Doublade","Aegislash","Spritzee","Aromatisse","Swirlix","Slurpuff","Inkay","Malamar","Binacle","Barbaracle","Skrelp","Dragalge","Clauncher","Clawitzer","Helioptile","Heliolisk","Tyrunt","Tyrantrum","Amaura","Aurorus","Sylveon","Hawlucha","Dedenne","Carbink","Goomy","Sliggoo","Goodra","Klefki","Phantump","Trevenant","Pumpkaboo","Gourgeist","Bergmite","Avalugg","Noibat","Noivern","Xerneas","Yveltal","Zygarde","Diancie");
-		for (String pokemon : pokemonlist) {
-			PokemonSpecies PokemonObject = new PokemonSpecies();
-			PokemonObject.loadFromBulbapedia(pokemon.replace(" ","_"));
-			PokemonObject.saveToXML();
-		}
 	}
 }
