@@ -2,23 +2,17 @@ package DataObjects;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
 
 import org.w3c.dom.DOMException;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
 import Web.Web;
@@ -71,11 +65,19 @@ public class PokemonSpecies {
 			DocumentBuilder DocBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 			Document doc = DocBuilder.parse(file);
 			Element rootElement = doc.getDocumentElement();
-			PokemonObject.setSpeciesName(rootElement.getElementsByTagName("SpeciesName").item(0).getTextContent());
-			PokemonObject.setDexNational(Integer.parseInt(rootElement.getElementsByTagName("DexNational").item(0).getTextContent()));
-			PokemonObject.setType1(rootElement.getElementsByTagName("Type1").item(0).getTextContent());
-			PokemonObject.setType2(rootElement.getElementsByTagName("Type2").item(0).getTextContent());
-			PokemonObject.setEggCycles(Integer.parseInt(rootElement.getElementsByTagName("EggCycles").item(0).getTextContent()));
+			NodeList pokemonList = rootElement.getElementsByTagName("Pokemon");
+			Integer numPokemon = pokemonList.getLength();
+			for(Integer i = 0 ; i < numPokemon ; i++) {
+				Element pokemonElement = (Element) pokemonList.item(i);
+				Integer thisDex = Integer.parseInt(pokemonElement.getElementsByTagName("DexNational").item(0).getTextContent());
+				if(thisDex==dexNumber) {
+					PokemonObject.setSpeciesName(pokemonElement.getElementsByTagName("SpeciesName").item(0).getTextContent());
+					PokemonObject.setDexNational(Integer.parseInt(pokemonElement.getElementsByTagName("DexNational").item(0).getTextContent()));
+					PokemonObject.setType1(pokemonElement.getElementsByTagName("Type1").item(0).getTextContent());
+					PokemonObject.setType2(pokemonElement.getElementsByTagName("Type2").item(0).getTextContent());
+					PokemonObject.setEggCycles(Integer.parseInt(pokemonElement.getElementsByTagName("EggCycles").item(0).getTextContent()));					
+				}
+			}
 		} catch (NumberFormatException e) {
 			e.printStackTrace();
 		} catch (DOMException e) {
