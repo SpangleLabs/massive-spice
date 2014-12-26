@@ -91,6 +91,43 @@ public class PokemonSpecies {
 		}
 		return PokemonObject;
 	}
+
+	public static PokemonSpecies loadFromXML(String speciesName) {
+		PokemonSpecies PokemonObject = new PokemonSpecies();
+		try {
+			speciesName = speciesName.toLowerCase();
+			String filename = "config/pokedex.xml";
+			File file = new File(filename);
+			DocumentBuilder DocBuilder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+			Document doc = DocBuilder.parse(file);
+			Element rootElement = doc.getDocumentElement();
+			NodeList pokemonList = rootElement.getElementsByTagName("Pokemon");
+			Integer numPokemon = pokemonList.getLength();
+			for(Integer i = 0 ; i < numPokemon ; i++) {
+				Element pokemonElement = (Element) pokemonList.item(i);
+				String thisName = pokemonElement.getElementsByTagName("SpeciesName").item(0).getTextContent().toLowerCase();
+				if(thisName.equals(speciesName)) {
+					PokemonObject.setSpeciesName(pokemonElement.getElementsByTagName("SpeciesName").item(0).getTextContent());
+					PokemonObject.setDexNational(Integer.parseInt(pokemonElement.getElementsByTagName("DexNational").item(0).getTextContent()));
+					PokemonObject.setType1(pokemonElement.getElementsByTagName("Type1").item(0).getTextContent());
+					PokemonObject.setType2(pokemonElement.getElementsByTagName("Type2").item(0).getTextContent());
+					PokemonObject.setEggCycles(Integer.parseInt(pokemonElement.getElementsByTagName("EggCycles").item(0).getTextContent()));					
+				}
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (DOMException e) {
+			e.printStackTrace();
+		} catch (ParserConfigurationException e) {
+			e.printStackTrace();
+		} catch (SAXException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return PokemonObject;
+	}
+
 	public String getSpeciesName() {
 		/* *
 		 * Returns the species name.
