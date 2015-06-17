@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<Messages>
+ <Message>
+  <Title>GIVEAWAY CLAIM</Title>
+  <Regex>B[0-9]{1,2} [1-5],[1-6]</Regex>
+  <Reply>Sure, I've marked that as reserved for you. Adding you now :)</Reply>
+ </Message>
+</Messages>
