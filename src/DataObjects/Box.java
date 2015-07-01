@@ -38,4 +38,18 @@ public class Box {
 		 */
 		this.mPokemonGrid.get(row).set(col, newPokemon);
 	}
+	
+	public String getName() {
+		/**
+		 * Returns the name of the box.
+		 */
+		return this.mName;
+	}
+	
+	public void setName(String name) {
+		/**
+		 * Sets the name of the box.
+		 */
+		this.mName = name;
+	}
 }
